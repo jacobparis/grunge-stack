@@ -61,8 +61,11 @@ async function main({ rootDirectory }) {
     ),
     fs.rm(path.join(rootDirectory, ".github/ISSUE_TEMPLATE"), {
       recursive: true,
+      force: true, // ignore ENOENT error
     }),
-    fs.rm(path.join(rootDirectory, ".github/PULL_REQUEST_TEMPLATE.md")),
+    fs.rm(path.join(rootDirectory, ".github/PULL_REQUEST_TEMPLATE.md"), {
+      force: true, // ignore ENOENT error
+    }),
   ]);
 
   await askSetupQuestions({ rootDirectory }).catch((error) => {
